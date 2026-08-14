@@ -1,7 +1,7 @@
 # picoCTF - Secret Box
-** Category **: Web Exploitation
-** Difficulty **: Medium
-** Author **: Janice He
+**Category**: Web Exploitation
+**Difficulty**: Medium
+**Author**: Janice He
 ---
 ## Challenge Description
 ```
