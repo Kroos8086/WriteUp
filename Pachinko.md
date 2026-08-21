@@ -1,9 +1,9 @@
 # WriteUp: NAND Simulator
 
-> **CTF:** PicoCTF  
-> **Challenge:** NAND Simulator  
-> **Category:** Web / Logic  
-> **Difficulty:** Medium  
+> **CTF:** PicoCTF
+> **Challenge:** NAND Simulator
+> **Category:** Web / Logic
+> **Difficulty:** Medium
 > **URL:** `http://activist-birds.picoctf.net:64584`
 
 ---
@@ -11,6 +11,7 @@
 ## Mô tả bài
 
 Challenge cung cấp một web app mô phỏng mạch logic NAND Gate. Người dùng có thể:
+
 - Kéo thả các node (Input, NAND, Output) để tạo mạch điện
 - Kết nối các node với nhau
 - Submit mạch lên server để kiểm tra
@@ -68,16 +69,18 @@ function createNode(x, y, value, type) {
 ```
 
 **Kết luận về Node ID:**
-| Node | Type | ID |
-|------|------|----|
-| Input 0 | input | 5 |
-| Input 1 | input | 6 |
-| Input 2 | input | 7 |
-| Input 3 | input | 8 |
-| Output 0 | output | 1 |
-| Output 1 | output | 2 |
-| Output 2 | output | 3 |
-| Output 3 | output | 4 |
+
+
+| Node     | Type   | ID |
+| -------- | ------ | -- |
+| Input 0  | input  | 5  |
+| Input 1  | input  | 6  |
+| Input 2  | input  | 7  |
+| Input 3  | input  | 8  |
+| Output 0 | output | 1  |
+| Output 1 | output | 2  |
+| Output 2 | output | 3  |
+| Output 3 | output | 4  |
 
 Khi người dùng nhấn **Submit**, frontend gửi request:
 
@@ -133,6 +136,7 @@ app.post('/check', async (req, res) => {
 **→ Bài toán:** Thiết kế mạch NAND thực hiện **phép NOT cho 4 đầu vào song song**.
 
 Hàm `doRun()` trả về flag khi:
+
 ```javascript
 if (result === 0x1337) {
     resp += FLAG1 + "\n";  // ← Đây là flag cần lấy
@@ -143,12 +147,13 @@ if (result === 0x1337) {
 
 ### Bước 3: Layout bộ nhớ (`utils.js`)
 
-| Địa chỉ | Nội dung |
-|---------|---------|
-| `0x0000` | `nand_checker.bin` (chương trình CPU) |
-| `0x1000` | Expected output (4 giá trị Uint16) |
-| `0x2000` | Input ngẫu nhiên (4 giá trị Uint16) |
-| `0x3000` | Circuit người dùng (3 × Uint16 mỗi gate) |
+
+| Địa chỉ | Nội dung                                     |
+| ---------- | --------------------------------------------- |
+| `0x0000`   | `nand_checker.bin` (chương trình CPU)      |
+| `0x1000`   | Expected output (4 giá trị Uint16)          |
+| `0x2000`   | Input ngẫu nhiên (4 giá trị Uint16)       |
+| `0x3000`   | Circuit người dùng (3 × Uint16 mỗi gate) |
 
 ---
 
@@ -163,14 +168,17 @@ NOT(A) = NAND(A, A)
 ```
 
 **Chứng minh:**
+
 ```
 NAND(A, A) = NOT(A AND A)
            = NOT(A)        ✓
 ```
 
 Bảng chân lý:
+
+
 | A | NAND(A, A) | NOT(A) |
-|---|------------|--------|
+| - | ---------- | ------ |
 | 0 | 1          | 1      |
 | 1 | 0          | 0      |
 
@@ -249,6 +257,4 @@ function updateGoalDisplay() {
 
 Bug này làm UI bị lỗi nhưng **không ảnh hưởng** đến exploit vì ta bypass hoàn toàn frontend.
 
----
-
-*WriteUp by: [Your Name] | PicoCTF*
+*
